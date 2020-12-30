@@ -102,6 +102,9 @@ func NewPrinter(m Method, out io.Writer, tests io.Writer) *Printer {
 		panic("cannot print tests with 'nil' tests argument!")
 	}
 	gens := make([]generator, 0, 7)
+	if m.isset(Size) {
+		gens = append(gens, sizes(out))
+	}
 	if m.isset(Decode) {
 		gens = append(gens, decode(out))
 	}
@@ -113,9 +116,6 @@ func NewPrinter(m Method, out io.Writer, tests io.Writer) *Printer {
 	}
 	if m.isset(Unmarshal) {
 		gens = append(gens, unmarshal(out))
-	}
-	if m.isset(Size) {
-		gens = append(gens, sizes(out))
 	}
 	if m.isset(marshaltest) {
 		gens = append(gens, mtest(tests))
