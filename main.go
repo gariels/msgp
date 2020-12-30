@@ -29,9 +29,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/tinylib/msgp/gen"
-	"github.com/tinylib/msgp/parse"
-	"github.com/tinylib/msgp/printer"
+	"github.com/gariels/msgp/gen"
+	"github.com/gariels/msgp/parse"
+	"github.com/gariels/msgp/printer"
 )
 
 var (
@@ -77,10 +77,10 @@ func main() {
 
 	var mode gen.Method
 	if *encode {
-		mode |= (gen.Encode | gen.Decode | gen.Size)
+		mode |= (gen.Size | gen.Encode | gen.Decode)
 	}
 	if *marshal {
-		mode |= (gen.Marshal | gen.Unmarshal | gen.Size)
+		mode |= (gen.Size | gen.Marshal | gen.Unmarshal)
 	}
 	if *tests {
 		mode |= gen.Test
